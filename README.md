@@ -16,6 +16,7 @@
 * Background: nohup bash mvnw.cmd spring-boot:run &
 
 ### Testing Application
+* start /min mvnw.cmd spring-boot:run &
 * Abrir navegador: http://localhost:8081/rest/mscovid/test?msg=testing
 
 ## Linux
