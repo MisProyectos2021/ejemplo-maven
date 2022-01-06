@@ -1,0 +1,15 @@
+version: '2'
+services:
+  master:
+    build: .
+    image: jenkis2/jenkins:latest
+    restart: unless-stopped
+    hostname: jenkins
+    ports:
+      - "8082:8080"
+      - "50002:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+ 
+volumes:
+  jenkins_home:

@@ -1,22 +1,27 @@
-pipeline {
+   pipeline {
     agent any
     stages{
              stage("Compile Code"){
                 steps{
                     script {
-                         dir("C:/Users/victo/Desktop/proyecto/ejemplo-maven"){
-                               bat "./mvnw.cmd clean compile -e"
-                        }
+                        dir("/var/jenkins_home/proyecto/ejemplo-maven/"){
+                                sh " ./mvnw clean compile -e"
+                         }
 
                     }
                 }
             }
             
-            stage("Test Code"){
+         
+   
+   
+   stage("Test Code"){
+   
+   
                 steps{
                     script {
-                            dir("C:/Users/victo/Desktop/proyecto/ejemplo-maven"){
-                               bat "./mvnw.cmd clean test -e"
+                          dir("/var/jenkins_home/proyecto/ejemplo-maven/"){
+                               sh  " ./mvnw clean test -e "
                         }
 
                     }
@@ -26,8 +31,8 @@ pipeline {
             stage("Jar Code"){
                 steps{
                     script {
-                            dir("C:/Users/victo/Desktop/proyecto/ejemplo-maven"){
-                               bat "./mvnw.cmd clean package -e"
+                          dir("/var/jenkins_home/proyecto/ejemplo-maven/"){
+                               sh  " ./mvnw clean package -e "
                         }
 
                     }
@@ -37,16 +42,13 @@ pipeline {
             stage("Run Jar"){
                 steps{
                     script {
-                            dir("C:/Users/victo/Desktop/proyecto/ejemplo-maven"){
-                                bat "start /min mvnw.cmd spring-boot:run &"
+                         dir("/var/jenkins_home/proyecto/ejemplo-maven/"){
+                               sh  "nohup bash mvnw spring-boot:run &"
                         }
 
                     }
                 }
             }
-            
-         
-            
-    }
-
-}
+			
+		}
+   }	
