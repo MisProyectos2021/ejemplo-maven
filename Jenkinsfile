@@ -1,14 +1,11 @@
 pipeline {
     agent any
     stages{
-        
-        
- 
              stage("Compile Code"){
                 steps{
                     script {
-                         dir("/var/jenkins_home/proyecto/ejemplo-maven"){
-                               sh "mvn clean compile -e"
+                         dir("C:/Users/victo/Desktop/proyecto/ejemplo-maven"){
+                               bat "./mvnw.cmd clean compile -e"
                         }
 
                     }
@@ -18,47 +15,36 @@ pipeline {
             stage("Test Code"){
                 steps{
                     script {
-                         dir("/var/jenkins_home/proyecto/ejemplo-maven"){
-                               sh "mvn clean test -e"
+                            dir("C:/Users/victo/Desktop/proyecto/ejemplo-maven"){
+                               bat "./mvnw.cmd clean test -e"
                         }
 
                     }
                 }
             }
             
-           stage("Jar Code"){
+            stage("Jar Code"){
                 steps{
                     script {
-                         dir("/var/jenkins_home/proyecto/ejemplo-maven"){
-                               sh "mvn clean package -e"
+                            dir("C:/Users/victo/Desktop/proyecto/ejemplo-maven"){
+                               bat "./mvnw.cmd clean package -e"
                         }
 
                     }
                 }
             }
             
-         stage("Run Jar"){
+            stage("Run Jar"){
                 steps{
                     script {
-                         dir("/var/jenkins_home/proyecto/ejemplo-maven"){
-                               sh "nohup bash mvn spring-boot:run &" 
-                               sleep 30
+                            dir("C:/Users/victo/Desktop/proyecto/ejemplo-maven"){
+                                bat "start /min mvnw.cmd spring-boot:run &"
                         }
 
                     }
                 }
             }
-        /*            
-           stage("Testing Application"){
-                steps{
-                    script {
-                              sh "curl -X GET 'http://localhost:8081/rest/mscovid/test?msg=testing'"
-                        }
-
-                    }
-                }
-          */  
-
+            
             
     }
 }
