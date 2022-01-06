@@ -48,7 +48,7 @@ pipeline {
                     }
                 }
             }
-            
+        /*            
            stage("Testing Application"){
                 steps{
                     script {
@@ -57,8 +57,7 @@ pipeline {
 
                     }
                 }
-            
-
+          */  
 
             
     }
