@@ -54,7 +54,7 @@
           stage("Testing Application"){
                 steps{
                     script {
-                               sh  " curl -X GET 'http://localhost:8081/rest/mscovid/test?msg=testing "
+                               sh  " curl -X GET 'http://localhost:8081/rest/mscovid/test?msg=testing' "
                     }
                 }
             }
