@@ -44,11 +44,21 @@
                     script {
                          dir("/var/jenkins_home/proyecto/ejemplo-maven/"){
                                sh  "nohup bash mvnw spring-boot:run &"
+                               sleep 20
                         }
 
                     }
                 }
             }
 			
+          stage("Testing Application"){
+                steps{
+                    script {
+                               sh  " curl -X GET 'http://localhost:8081/rest/mscovid/test?msg=testing "
+                    }
+                }
+            }
+
+            
 		}
    }	
