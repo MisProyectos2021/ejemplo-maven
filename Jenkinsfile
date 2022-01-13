@@ -13,7 +13,7 @@
         steps{
          script {
                 def scannerHome = tool 'sonar-scanner';
-                withSonarQubeEnv('sonarqube-server') { // If you have configured more than one global server connection, you can specify its name
+                withSonarQubeEnv('sonarqube-server') { 
                                 sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=ejemplo-maven-key  -Dsonar.sources=src -Dsonar.java.binaries=build "
                          }
                 }
