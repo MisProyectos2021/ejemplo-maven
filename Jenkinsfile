@@ -4,10 +4,7 @@
              stage("Compile Code"){
                 steps{
                     script {
-                        dir("/var/jenkins_home/proyecto/ejemplo-maven/"){
                                 sh " ./mvnw clean compile -e"
-                         }
-
                     }
                 }
             }
@@ -17,8 +14,7 @@
          script {
                 def scannerHome = tool 'sonar-scanner';
                 withSonarQubeEnv('sonarqube-server') { // If you have configured more than one global server connection, you can specify its name
-                      sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=ejemplo-maven-key -Dsonar.sources=src -Dsonar.sources=src sonar.java.binaries=build "
-
+                                sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=ejemplo-maven-key  -Dsonar.sources=src Dsonar.java.binaries=build "
                          }
                 }
        }
