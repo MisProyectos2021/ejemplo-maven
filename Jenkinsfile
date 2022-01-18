@@ -38,7 +38,7 @@
             stage("Jar Code"){
                 steps{
                     script {
-                               sh  " ./mvnw clean install -e "
+                               sh  " ./mvnw clean package -e "
                         
 
                     }
@@ -56,16 +56,26 @@
              }
             }
 
+/*
              stage("Upload to Nexus"){
                
                 steps{
                      sh 'echo ${WORKSPACE}'
                     script {
-                       nexusPublisher nexusInstanceId: 'nexus_test', nexusRepositoryId: 'test-nexus', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "${WORKSPACE}/build/DevOpsUsach2020-0.0.1.jar"]], mavenCoordinate: [artifactId: 'DevOpsUsach2020', groupId: 'com.devopsusach2020', packaging: 'jar', version: '0.0.2']]]
+                       nexusPublisher nexusInstanceId: 'nexus_test', nexusRepositoryId: 'test-nexus', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "${WORKSPACE}/build/DevOpsUsach2020-0.0.1.jar"]], mavenCoordinate: [artifactId: 'DevOpsUsach2020', groupId: 'com.devopsusach2020', packaging: 'jar', version: '0.0.1']]]
                 }
              }
             }
+*/
 
+         stage("Upload to Nexus"){
+               
+                steps{
+                     sh 'echo ${WORKSPACE}'
+                    script {
+                    nexusPublisher nexusInstanceId: 'test_repo', nexusRepositoryId: 'test-repo', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "${WORKSPACE}/build/DevOpsUsach2020-0.0.1.jar"]], mavenCoordinate: [artifactId: 'DevOpsUsach2020', groupId: 'com.devopsusach2020', packaging: 'jar', version: '0.0.1']]]                }
+             }
+            }
             
             stage("Run Jar"){
                 steps{
