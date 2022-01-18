@@ -10,6 +10,24 @@
                         }
                     }
 
+           stage("Run Jar"){
+                steps{
+                    script {
+                               sh  "nohup bash mvnw spring-boot:run &"
+                               sleep 20
+
+                    }
+                }
+            }
+			
+          stage("Testing Application"){
+                steps{
+                    script {
+                               sh  " curl -X GET 'http://localhost:8081/rest/mscovid/test?msg=testing' "
+                    }
+                }
+            }  
+
 
              stage("Upload to Nexus"){
                
