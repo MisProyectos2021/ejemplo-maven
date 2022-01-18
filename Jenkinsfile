@@ -8,6 +8,9 @@
                     }
                 }
             }
+
+
+            
             
     stage('SonarQube analysis') {
         steps{
@@ -44,6 +47,16 @@
                     }
                 }
             }
+
+
+         stage("uploadNexus"){
+                steps{
+                    script {
+                         nexusPublisher nexusInstanceId: 'nexus_test', nexusRepositoryId: 'test-nexus', packages: [[$class: 'MavenPackage', mavenAssetList: [], mavenCoordinate: [artifactId: 'DevOpsUsach2020', groupId: 'com.devopsusach2020', packaging: 'jar', version: '0.0.2']]]
+                    }
+             }
+        }
+
             
             stage("Run Jar"){
                 steps{
@@ -63,13 +76,6 @@
                 }
             }
 
-            stage("uploadNexus"){
-                steps{
-                    script {
-                        sh "nexusPublisher nexusInstanceId: 'nexus_test', nexusRepositoryId: 'test-nexus', packages: [[$class: 'MavenPackage', mavenAssetList: [], mavenCoordinate: [artifactId: 'DevOpsUsach2020', groupId: 'com.devopsusach2020', packaging: 'jar', version: '0.0.2']]]"
-                }
-             }
-            }
 
             
 		}
