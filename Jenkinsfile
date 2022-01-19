@@ -9,11 +9,20 @@
                             }
                         }
                     }
+                    
+            stage('Guardando WAR') {             
+                steps{
+                    script {
+                              archiveArtifacts '*.jar'
+
+                }
+             }
+            }
 
            stage("Run Jar"){
                 steps{
                     script {
-                               sh  "nohup bash mvnw spring-boot:run &"
+                                sh "nohup java -jar DevOpsUsach2020-1.0.0.jar &"
                                sleep 20
 
                     }
@@ -34,7 +43,7 @@
                 steps{
                      sh 'echo ${WORKSPACE}'
                     script {
-                       nexusPublisher nexusInstanceId: 'nexus_test', nexusRepositoryId: 'test-nexus', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "${WORKSPACE}/build/DevOpsUsach2020-0.0.1.jar"]], mavenCoordinate: [artifactId: 'DevOpsUsach2020', groupId: 'com.devopsusach2020', packaging: 'jar', version: '1.0.2']]]                }
+nexusPublisher nexusInstanceId: 'nexus_test', nexusRepositoryId: 'test-nexus', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "${WORKSPACE}/DevOpsUsach2020-1.0.0.jar"]], mavenCoordinate: [artifactId: 'DevOpsUsach2020', groupId: 'com.devopsusach2020', packaging: 'jar', version: '1.0.0']]]
              }
             }
 
@@ -43,3 +52,4 @@
             
 		}
    }	
+   }
